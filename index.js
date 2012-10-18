@@ -22,6 +22,11 @@ var defaults = exports.defaults = function(obj, def) {
   return obj
 }
 
+// A block can be a string or a synchronous function
+var call = exports.call = function(fn, context) {
+  return typeof fn === 'function' ? fn.apply(context) : fn
+}
+
 exports.createElement = function(tagName, attributes, innerHTML) {
   var buf = '<' + tagName
 
@@ -37,11 +42,7 @@ exports.createElement = function(tagName, attributes, innerHTML) {
 
   buf += '>'
 
-  if (innerHTML) {
-    buf += typeof innerHTML === 'function' 
-      ? innerHTML.call(attributes || {}) 
-      : innerHTML
-  }
+  if (innerHTML) buf += call(innerHTML, attributes || {});
 
   if (innerHTML || !~selfClosing.indexOf(tagName)) buf += '</' + tagName + '>';
 
@@ -50,14 +51,15 @@ exports.createElement = function(tagName, attributes, innerHTML) {
 
 exports.defaultAttributes = function(args, def) {
   var last = args[args.length - 1]
-  return last === Object(last)
-    ? defaults(last, def)
-    : def
+  if (last === Object(last) {
+    return def ? defaults(last, def) : last
+  })
+  return {}
 }
 
 var render = exports.render = function(fn, options, callback) {
   try {
-    fn.call(options.context || {}, options, callback)
+    fn.call(options.context || options, options, callback)
   } catch (err) {
     callback(err)
   }
