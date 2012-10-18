@@ -1,6 +1,6 @@
 {
   "name": "cat",
-  "description": "String-concat-based Templating System",
+  "description": "String-concat-based Templates",
   "version": "0.0.1",
   "author": {
     "name": "Jonathan Ong",
