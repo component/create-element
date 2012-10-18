@@ -1,0 +1,8 @@
+{
+  "name": "cat",
+  "description": "String-concat-based Templating System",
+  "version": "0.0.1",
+  "scripts": [
+    "index.js"
+  ]
+}

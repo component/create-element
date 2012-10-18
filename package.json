@@ -1,0 +1,24 @@
+{
+  "name": "cat",
+  "description": "String-concat-based Templating System",
+  "version": "0.0.1",
+  "author": {
+    "name": "Jonathan Ong",
+    "email": "me@jongleberry.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/discore/cat.git"
+  },
+  "bugs": {
+    "mail": "dev@funraise.me",
+    "url": "https://github.com/discore/cat/issues"
+  },
+  "engines": {
+    "node": "0.8.x"
+  },
+  "licenses": [{
+    "type": "Common Public Attribution License Version 1.0 (CPAL-1.0)",
+    "url": "http://opensource.org/licenses/cpal_1.0"
+  }]
+}

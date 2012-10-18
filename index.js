@@ -1,9 +1,5 @@
-exports = module.exports = function() {
-  // Hi, I do nothing.
-}
-
 // Copied from https://github.com/visionmedia/jade/blob/master/lib/self-closing.js
-var selfClosing = exports.selfClosing = [
+var selfClosing = exports.selfClosingTags = [
   'meta',
   'img',
   'link',
@@ -16,12 +12,7 @@ var selfClosing = exports.selfClosing = [
   'hr'
 ]
 
-exports.el = function el(tagName, attributes, innerHTML) {
-  if (typeof attributes === 'string') {
-    innerHTML = attributes
-    attributes = null
-  }
-
+exports.createElement = function(tagName, attributes, innerHTML) {
   var buf = '<' + tagName
 
   if (attributes) {
@@ -36,24 +27,43 @@ exports.el = function el(tagName, attributes, innerHTML) {
 
   buf += '>'
 
-  if (innerHTML) buf += innerHTML;
+  if (innerHTML) {
+    buf += typeof innerHTML === 'function' 
+      ? innerHTML.call(attributes || {}) 
+      : innerHTML
+  }
 
   if (innerHTML || !~selfClosing.indexOf(tagName)) buf += '</' + tagName + '>';
 
   return buf
 }
 
-exports.extends = function(fnChild, fnParent) {
-  return function(locals, html, callback) {
-    fnChild(locals, '', function(err, html) {
-      if (err) callback(err);
-      else fnParent(locals, html, callback);
-    })
+var defaults = exports.defaults = function(obj, def) {
+  for (var key in def) {
+    if (obj[key] == null) {
+      obj[key] = def[key]
+    }
   }
+  return obj
+}
+
+exports.defaultAttributes = function(args, def) {
+  var last = args[args.length - 1]
+  return last === Object(last)
+    ? defaults(last, def)
+    : def
 }
 
 var compile = exports.compile = function(fn, options, callback) {
-  fn.call(options.context, options.locals, options.block, callback)
+  try {
+    fn.call(
+      options.context || {}, 
+      options.locals || {}, 
+      callback
+    )
+  } catch (err) {
+    callback(err)
+  }
 }
 
 /*
