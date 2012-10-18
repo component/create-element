@@ -12,6 +12,16 @@ var selfClosing = exports.selfClosingTags = [
   'hr'
 ]
 
+// From underscore
+var defaults = exports.defaults = function(obj, def) {
+  for (var key in def) {
+    if (obj[key] == null) {
+      obj[key] = def[key]
+    }
+  }
+  return obj
+}
+
 exports.createElement = function(tagName, attributes, innerHTML) {
   var buf = '<' + tagName
 
@@ -36,16 +46,6 @@ exports.createElement = function(tagName, attributes, innerHTML) {
   if (innerHTML || !~selfClosing.indexOf(tagName)) buf += '</' + tagName + '>';
 
   return buf
-}
-
-// From underscore
-var defaults = exports.defaults = function(obj, def) {
-  for (var key in def) {
-    if (obj[key] == null) {
-      obj[key] = def[key]
-    }
-  }
-  return obj
 }
 
 exports.defaultAttributes = function(args, def) {
