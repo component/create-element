@@ -12,14 +12,16 @@ var selfClosing = exports.selfClosingTags = [
   'hr'
 ]
 
-// From underscore
-var defaults = exports.defaults = function(obj, def) {
-  for (var key in def) {
-    if (obj[key] == null) {
-      obj[key] = def[key]
+var attrToString = exports.attributesToString = function(attributes) {
+  var buf = ''
+  for (var prop in attributes) {
+    var value = attributes[prop]
+    if (value) {
+      buf += ' ' + prop
+      if (value !== true) buf += '="' + value + '"';
     }
   }
-  return obj
+  return buf
 }
 
 // A block can be a string or a synchronous function
@@ -29,37 +31,16 @@ var call = exports.call = function(fn, context) {
 
 exports.createElement = function(tagName, attributes, innerHTML) {
   var buf = '<' + tagName
-
-  if (attributes) {
-    for (var prop in attributes) {
-      var value = attributes[prop]
-      if (value) {
-        buf += ' ' + prop
-        if (value !== true) buf += '="' + value + '"';
-      }
-    }
-  }
-
+  if (attributes) buf += attrToString(attributes);
   buf += '>'
-
   if (innerHTML) buf += call(innerHTML, attributes || {});
-
   if (innerHTML || !~selfClosing.indexOf(tagName)) buf += '</' + tagName + '>';
-
   return buf
-}
-
-exports.defaultAttributes = function(args, def) {
-  var last = args[args.length - 1]
-  if (last === Object(last) {
-    return def ? defaults(last, def) : last
-  })
-  return {}
 }
 
 var render = exports.render = function(fn, options, callback) {
   try {
-    fn.call(options.context || options, options, callback)
+    fn.call(options, options, callback)
   } catch (err) {
     callback(err)
   }
