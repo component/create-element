@@ -38,6 +38,7 @@ exports.createElement = function(tagName, attributes, innerHTML) {
   return buf
 }
 
+// From underscore
 var defaults = exports.defaults = function(obj, def) {
   for (var key in def) {
     if (obj[key] == null) {
@@ -54,13 +55,9 @@ exports.defaultAttributes = function(args, def) {
     : def
 }
 
-var compile = exports.compile = function(fn, options, callback) {
+var render = exports.render = function(fn, options, callback) {
   try {
-    fn.call(
-      options.context || {}, 
-      options.locals || {}, 
-      callback
-    )
+    fn.call(options.context || {}, options, callback)
   } catch (err) {
     callback(err)
   }
@@ -77,8 +74,8 @@ var compile = exports.compile = function(fn, options, callback) {
   Would be nice if component had an uncache function, however.
 
 */
-exports.render = function(filename, options, callback) {
+var renderFile = exports.renderFile = function(filename, options, callback) {
   if (!options.cache && require.cache) delete require.cache[filename];
 
-  compile(require(filename), options, callback)
+  render(require(filename), options, callback)
 }

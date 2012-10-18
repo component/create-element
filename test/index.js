@@ -1,10 +1,10 @@
 var cat = require('../')
 var assert = require('assert')
-var compile = cat.compile
+var render = cat.render
 var el = cat.createElement
 var defaults = cat.defaultAttributes
 
-compile(function(locals, callback) {
+render(function(locals, callback) {
   var anchor = el('a', {
     href: locals.href,
     target: '_blank',
@@ -29,7 +29,7 @@ function mixin(a, b) {
   }), a)
 }
 
-compile(function(locals, callback) {
+render(function(locals, callback) {
   callback(null, mixin('text'))
 }, {}, function(err, html) {
   assert.ifError(err)
@@ -37,7 +37,7 @@ compile(function(locals, callback) {
   assert.equal('<a href="#">text</a>', html, 'Invalid first mixin: ' + html)
 })
 
-compile(function(locals, callback) {
+render(function(locals, callback) {
   callback(null, mixin('test', {
     href: '/'
   }))
@@ -47,7 +47,7 @@ compile(function(locals, callback) {
   assert.equal('<a href="/">test</a>', html, 'Invalid second mixin: ' + html)
 })
 
-compile(function(locals, callback) {
+render(function(locals, callback) {
   callback(null, mixin('test', {
     target: '_blank'
   }))
