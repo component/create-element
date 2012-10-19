@@ -29,6 +29,13 @@ var call = exports.call = function(fn, context) {
   return typeof fn === 'function' ? fn.apply(context) : fn
 }
 
+/*
+
+  tagName [string]
+  attributes [object]
+  innerHTML [string || function]
+
+*/
 exports.createElement = function(tagName, attributes, innerHTML) {
   var buf = '<' + tagName
   if (attributes) buf += attrToString(attributes);
