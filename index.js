@@ -18,6 +18,7 @@ var attrToString = exports.attributesToString = function(attributes) {
     var value = attributes[prop]
     if (value) {
       buf += ' ' + prop
+      if (Array.isArray(value)) value = value.join(' ');
       if (value !== true) buf += '="' + value + '"';
     }
   }
