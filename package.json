@@ -15,7 +15,8 @@
     "url": "https://github.com/discore/cat/issues"
   },
   "devDependencies": {
-    "express": "3"
+    "express": "3",
+    "request": "2"
   },
   "engines": {
     "node": "0.8.x"

@@ -21,4 +21,14 @@ render(function(locals, callback) {
   assert.equal('<a href="#" target="_blank" title="kitty">kitty</a>', html, 'Incorrect HTML: ' + html)
 })
 
+render(function(locals, callback) {
+  callback(null, el('div', {
+    class: ['a', 'b']
+  }))
+}, {}, function(err, html) {
+  assert.ifError(err)
+
+  assert.equal('<div class="a b"></div>', html, 'Incorrect array parsing.')
+})
+
 console.log('tada!!!')
