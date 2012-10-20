@@ -1,6 +1,17 @@
 ## String-con`cat` based Javascript templates for Express and Component
 
-A few helpers to make templating using string concatenations easier.
+A few helpers to make templating using string concatenations easier. 
+You should only use this if your templates have a significant amount of logic.
+
+### Why?
+
+* Use Javascript more easily in your templates.
+* Modularize your templates.
+* Organize, extend, include, etc. your templates any way you like.
+* Templates compile to string concatenations anyways!
+* Less than 2kb uncompressed.
+* Works in both the browser and node.js.
+* Use asynchronous logic in your templates, though you probably shouldn't do that.
 
 ### Requirements
 
@@ -26,18 +37,17 @@ IE9+
 
 A helper to create an HTML element. 
 Only really recommended for DOMs with many attributes.
-
-Note: this function assumes an HTML5 doctype.
+This function assumes an HTML5 doctype.
 
 Arguments:
 
 * `tagName` [string]
 * `attributes` [object] - Object defining the tag attributes.
-  Attribute scan be an array (that will `.join(' ')`ed),
+  Attributes can be an array (that will `.join(' ')`ed),
   a boolean, or a string.
-* `block` [string || function] - Element's block. 
+* `block` [string || function] - Element's innerHTML. 
   Does not escape for you.
-  Function will simply be called and concatenated.
+  Functions will simply be called and concatenated.
 
 Example:
 
@@ -57,14 +67,14 @@ Example:
 Arguments:
 
 * `fn` - Template that takes the following arguments:
-  * `locals` - Locals object to pass from the renderer
+  * `locals` - Locals object to template
   * `callback(err, html)` - Function to pass the HTML or an error object.
-* `locals` - Locals object to pass from the renderer
+* `locals` - Locals object to template
 * `callback`
 
 ### `cat.renderFile(filename, options, callback)`
 
-Same as `render` except `require`s the file.
+Same as `cat.render` except `require`s the file.
 Use this for Express:
 
     app.set('views', __dirname + '/views')
