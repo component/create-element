@@ -25,10 +25,10 @@ var attrToString = exports.attributesToString = function(attributes) {
 
   function append(prop) {
     var value = attributes[prop]
+    if (Array.isArray(value)) value = value.join(' ');
     if (!value) return;
 
     buf += ' ' + prop
-    if (Array.isArray(value)) value = value.join(' '); // For an array of classes
     if (value !== true) buf += '="' + String(value) + '"';
   }
 
@@ -70,9 +70,9 @@ exports.createElement = function(tagName, attributes, block) {
   return buf
 }
 
-var render = exports.render = function(fn, options, callback) {
+var render = exports.render = function(fn, locals, callback) {
   try {
-    fn(options, callback)
+    fn(locals, callback)
   } catch (err) {
     callback(err)
   }
@@ -83,6 +83,6 @@ var render = exports.render = function(fn, options, callback) {
   Always caches due to `require`.
 
 */
-exports.renderFile = function(filename, options, callback) {
-  render(require(filename), options, callback)
+exports.renderFile = function(filename, locals, callback) {
+  render(require(filename), locals, callback)
 }
