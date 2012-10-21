@@ -25,7 +25,6 @@ Maybe you can use another CommonJS system, I don't know.
 
 IE9+
 
-  * `indexOf`
   * `Array.isArray`
   * `String`
   * `Object` ?
