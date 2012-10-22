@@ -47,7 +47,7 @@ Example:
 
     cat.createElement('a', {
       href: '#',
-      class: ['btn', 'btn-red'],
+      class: ['btn', 'btn-red', '', false],
       target: '_blank',
       title: 'kitty',
       'data-true': true,
