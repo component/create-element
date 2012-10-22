@@ -36,7 +36,7 @@ var attrToString = exports.attributesToString = function(attributes) {
     if (!value) return;
 
     buf += ' ' + prop
-    if (value !== true) buf += '="' + String(value) + '"';
+    if (value !== true) buf += '="' + value + '"';
   }
 
   for (var prop in attributes) append(prop);
@@ -59,14 +59,11 @@ var call = exports.call = function(block) {
   attributes [object] (optional)
   block [string || function] (optional)
 
-  future: allow tagName to be a selector
-    div#id.class1.class2[prop="value"]
-
 */
 exports.createElement = function(tagName, attributes, block) {
   if (!block && attributes && Object(attributes) !== attributes) {
-    attributes = null
     block = attributes
+    attributes = null
   }
 
   var buf = '<' + tagName
