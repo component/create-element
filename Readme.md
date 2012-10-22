@@ -25,11 +25,6 @@ Maybe you can use another CommonJS system, I don't know.
 
 IE9+
 
-  * `Array.isArray`
-  * `String`
-  * `Object` ?
-
-
 ## API
 
 ### `cat.createElement(tagName, [attributes, [block]])`
