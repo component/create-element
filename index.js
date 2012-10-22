@@ -32,7 +32,11 @@ var attrToString = exports.attributesToString = function(attributes) {
 
   function append(prop) {
     var value = attributes[prop]
-    if (Array.isArray(value)) value = value.join(' ');
+    if (Array.isArray(value)) {
+      value = value.filter(function(x) {
+        return x
+      }).join(' ')
+    }
     if (!value) return;
 
     buf += ' ' + prop
