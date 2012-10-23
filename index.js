@@ -1,23 +1,15 @@
-// Copied from https://github.com/visionmedia/jade/blob/master/lib/self-closing.js
-var selfClosing = exports.selfClosing = (function() {
-  var arr = [
-    'meta',
-    'img',
-    'link',
-    'input',
-    'source',
-    'area',
-    'base',
-    'col',
-    'br',
-    'hr'
-  ]
-  var obj = {}
-
-  for (var i=0, l=arr.length; i<l; i++) obj[arr[i]] = true;
-
-  return obj
-})();
+var selfClosing = exports.selfClosing = {
+  meta: 1,
+  img: 1,
+  link: 1,
+  input: 1,
+  source: 1,
+  area: 1,
+  base: 1,
+  col: 1,
+  br: 1,
+  hr: 1
+}
 
 /*
 
