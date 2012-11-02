@@ -1,4 +1,8 @@
-var selfClosing = exports.selfClosing = {
+function I(x) {
+  return x
+}
+
+var selfClosing = {
   meta: 1,
   img: 1,
   link: 1,
@@ -18,35 +22,21 @@ var selfClosing = exports.selfClosing = {
     [string] : [string || array of strings || boolean]
 
 */
-
-var attrToString = exports.attributesToString = function(attributes) {
+function attributesToString(attributes) {
   var buf = ''
 
-  function append(prop) {
-    var value = attributes[prop]
+  Object.keys(attributes).forEach(function(attribute) {
+    var value = attributes[attribute]
     if (Array.isArray(value)) {
-      value = value.filter(function(x) {
-        return x
-      }).join(' ')
+      value = value.filter(I).join(' ')
     }
     if (!value) return;
 
-    buf += ' ' + prop
+    buf += ' ' + attribute
     if (value !== true) buf += '="' + value + '"';
-  }
-
-  for (var prop in attributes) append(prop);
+  })
 
   return buf
-}
-
-/*
-
-  block [string || function]
-
-*/
-var call = exports.call = function(block) {
-  return typeof block === 'function' ? block() : block
 }
 
 /*
@@ -56,33 +46,20 @@ var call = exports.call = function(block) {
   block [string || function] (optional)
 
 */
-exports.createElement = function(tagName, attributes, block) {
+exports = module.exports = function(tagName, attributes, block) {
   if (!block && attributes && Object(attributes) !== attributes) {
     block = attributes
     attributes = null
   }
 
   var buf = '<' + tagName
-  if (attributes) buf += attrToString(attributes);
+  if (attributes) buf += attributesToString(attributes);
   buf += '>'
-  if (block) buf += call(block);
+  if (block) buf += typeof block === 'function' ? block() : block;
   if (block || !selfClosing[tagName])) buf += '</' + tagName + '>';
   return buf
 }
 
-var render = exports.render = function(fn, locals, callback) {
-  try {
-    fn(locals, callback)
-  } catch (err) {
-    callback(err)
-  }
-}
+exports.selfClosing = selfClosing
 
-/*
-  
-  Always caches due to `require`.
-
-*/
-exports.renderFile = function(filename, locals, callback) {
-  render(require(filename), locals, callback)
-}
+exports.attributesToString = attributesToString
