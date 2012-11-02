@@ -1,5 +1,5 @@
 {
-  "name": "cat",
+  "name": "createelement",
   "description": "HTML element creator helper",
   "version": "0.0.1",
   "author": {
@@ -8,15 +8,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/discore/cat.git"
+    "url": "https://github.com/discore/createelement.git"
   },
   "bugs": {
     "mail": "dev@funraise.me",
-    "url": "https://github.com/discore/cat/issues"
-  },
-  "devDependencies": {
-    "express": "3",
-    "request": "2"
+    "url": "https://github.com/discore/createelement/issues"
   },
   "engines": {
     "node": "0.8.x"

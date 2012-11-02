@@ -1,6 +1,6 @@
 {
-  "name": "cat",
-  "description": "String-concat-based Templates",
+  "name": "createelement",
+  "description": "HTML element creator helper",
   "version": "0.0.1",
   "scripts": [
     "index.js"
