@@ -54,7 +54,7 @@ exports = module.exports = function(tagName, attributes, block) {
   if (attributes) buf += attributesToString(attributes);
   buf += '>'
   if (block) buf += typeof block === 'function' ? block() : block;
-  if (block || !selfClosing[tagName])) buf += '</' + tagName + '>';
+  if (block || !selfClosing[tagName]) buf += '</' + tagName + '>';
   return buf
 }
 
