@@ -19,7 +19,7 @@ var selfClosing = {
 
   attributes [object]
 
-    [string] : [string || array of strings || boolean]
+    [string] : [string || array of strings || object of strings || boolean]
 
 */
 function attributesToString(attributes) {
@@ -27,7 +27,17 @@ function attributesToString(attributes) {
 
   Object.keys(attributes).forEach(function(attribute) {
     var value = attributes[attribute]
-    if (Array.isArray(value)) value = value.filter(I).join(' ');
+
+    if (!value) return;
+
+    if (Array.isArray(value)) {
+      value = value.filter(I).join(' ')
+    } else if (Object(value) === value) {
+      value = Object.keys(value).filter(function (key) {
+        return value[key]
+      }).join(' ')
+    }
+
     if (!value) return;
 
     buf += ' ' + attribute
