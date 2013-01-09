@@ -1,5 +1,5 @@
 {
-  "name": "createelement",
+  "name": "create-element",
   "description": "HTML element creator helper",
   "version": "0.0.1",
   "scripts": [
