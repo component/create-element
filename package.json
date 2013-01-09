@@ -1,5 +1,5 @@
 {
-  "name": "createelement",
+  "name": "create-element",
   "description": "HTML element creator helper",
   "version": "0.0.1",
   "author": {
@@ -8,11 +8,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/discore/createelement.git"
+    "url": "https://github.com/discore/create-element.git"
   },
   "bugs": {
     "mail": "dev@funraise.me",
-    "url": "https://github.com/discore/createelement/issues"
+    "url": "https://github.com/discore/create-element/issues"
   },
   "licenses": [{
     "type": "Apache License, Version 2.0",
