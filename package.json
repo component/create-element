@@ -1,7 +1,7 @@
 {
   "name": "create-element",
-  "description": "HTML element creator helper",
-  "version": "0.0.1",
+  "description": "HTML element string creator",
+  "version": "0.1.0",
   "author": {
     "name": "Jonathan Ong",
     "email": "me@jongleberry.com"
@@ -11,11 +11,7 @@
     "url": "https://github.com/discore/create-element.git"
   },
   "bugs": {
-    "mail": "dev@funraise.me",
+    "mail": "me@jongleberry.com",
     "url": "https://github.com/discore/create-element/issues"
-  },
-  "licenses": [{
-    "type": "Apache License, Version 2.0",
-    "url": "http://www.apache.org/licenses/LICENSE-2.0"
-  }]
+  }
 }

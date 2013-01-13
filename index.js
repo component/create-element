@@ -1,7 +1,3 @@
-function createElement(tagName, attributes, block) {
-  return createElement.element.call(this, tagName, attributes, block)
-}
-
 module.exports = createElement
 
 /*
@@ -11,7 +7,7 @@ module.exports = createElement
   block [string || function] (optional)
 
 */
-createElement.element = function (tagName, attributes, block) {
+function createElement(tagName, attributes, block) {
   if (!block && attributes && Object(attributes) !== attributes) {
     block = attributes
     attributes = null
