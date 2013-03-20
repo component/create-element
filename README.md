@@ -2,24 +2,29 @@
 
 Programatically create an HTML string.
 
-    var createElement = require('create-element')
+```js
+var createElement = require('create-element')
 
-    createElement('a', {
-      id: 'user-link',
-      href: '#',
-      class: {
-        yes: true,
-        no: false,
-        'maybe-so': true
-      },
-      'data-id': user.id
-    }, user.name)
+createElement('a', {
+  id: 'user-link',
+  href: '#',
+  class: {
+    yes: true,
+    no: false,
+    'maybe-so': true
+  },
+  'data-id': user.id
+}, user.name)
+```
 
-    > '<a id="user-link" href="#" class="yes maybe-so" data-id="jonathanong">Jonathan Ong</a>'
+yields:
 
+```html
+<a id="user-link" href="#" class="yes maybe-so" data-id="jonathanong">Jonathan Ong</a>
+```
 ## API
 
-### `createElement` = `function (tagName, [attributes], [innerHTML])`
+### createElement(tagName, [attributes], [innerHTML])
 
 #### Output
 
@@ -33,19 +38,21 @@ Programatically create an HTML string.
 * `innerHTML` [function || string] - element's `innerHTML`.
   If a function, evaluates the function within `createElement.element`'s current context, ie `fn.call(this, '')`.
 
-    var html = createElement.element('a', {
-      href: '#'
-    }, function (html) {
-      // html === ''
-      html += user.name
+```js
+var html = createElement.element('a', {
+  href: '#'
+}, function (html) {
+  // html === ''
+  html += user.name
 
-      return html
-    })
+  return html
+})
+```
 
 Both `attributes` and `innerHTML` are optional via type checking.
 If there is no `innerHTML`, the element will not be self closed depending on `tagName`.
 
-### `createElement.attributes` = `function (attributes)`
+### createElement.attributes(attributes)
 
 `attributes` is an object with attribute keys and values.
 Each `attributes.value` can be:
@@ -54,42 +61,50 @@ Each `attributes.value` can be:
 * `[array]` - Removes the "falsey" strings and `[].join(' ')` the strings
 * `[object]` - Removes the keys with "falsey" values and `[].join(' ')`s the keys
 
-    createElement.attributes({
-      id: [
-        '1',
-        '2',
-        false,
-        null,
-        '5'
-      ],
-      class: {
-        yes: true,
-        no: false,
-        'maybe-so'; true
-      },
-      href: 'some string'
-    })
+```js
+createElement.attributes({
+  id: [
+    '1',
+    '2',
+    false,
+    null,
+    '5'
+  ],
+  class: {
+    yes: true,
+    no: false,
+    'maybe-so'; true
+  },
+  href: 'some string'
+})
+```
 
-    > ' id="1 2 5" class="yes maybe-so" href="some string"'
+yields:
 
-### `createElement.selfClosingTags` = `{}`
+```js
+' id="1 2 5" class="yes maybe-so" href="some string"'
+```
 
-    createElement.selfClosingTags = {
-      meta: true,
-      img: true,
-      link: true,
-      input: true,
-      source: true,
-      area: true,
-      base: true,
-      col: true,
-      br: true,
-      hr: true
-    }
+### createElement.selfClosingTags
 
-### `createElement.openingTag` = `function (tagName, [attributes])`
+```js
+createElement.selfClosingTags = {
+  meta: true,
+  img: true,
+  link: true,
+  input: true,
+  source: true,
+  area: true,
+  base: true,
+  col: true,
+  br: true,
+  hr: true
+}
+```
 
-### `createElement.closingTag` = `function (tagName)`
+### createElement.openingTag(tagName, [attributes])
+
+### createElement.closingTag(tagName)
 
 ## Browser Support
 
