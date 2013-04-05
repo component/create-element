@@ -1,4 +1,19 @@
 module.exports = createElement
+createElement.openingTag = openingTag
+createElement.closingTag = closingTag
+createElement.attributes = createAttributes
+var selfClosingTags = createElement.selfClosingTags = {
+  meta: true,
+  img: true,
+  link: true,
+  input: true,
+  source: true,
+  area: true,
+  base: true,
+  col: true,
+  br: true,
+  hr: true
+}
 
 /*
 
@@ -13,30 +28,18 @@ function createElement(tagName, attributes, block) {
     attributes = null
   }
 
-  var buf = createElement.openingTag(tagName, attributes)
-
-  if (block) {
-    if (typeof block === 'function') {
-      buf += block.call(this, '')
-    } else {
-      buf += block
-    }
-  }
-
-  if (block || !createElement.selfClosingTags[tagName]) {
-    buf += createElement.closingTag(tagName)
-  }
-
-  return buf
+  return openingTag(tagName, attributes) +
+    (block ? (typeof block === 'function' ? block.call(this, '') : block) : '') +
+    (block || !selfClosingTags[tagName] ? closingTag(tagName) : '')
 }
 
-createElement.openingTag = function (tagName, attributes) {
+function openingTag(tagName, attributes) {
   return '<' + tagName +
-    (attributes ? createElement.attributes(attributes) : '') +
+    (attributes ? createAttributes(attributes) : '') +
     '>'
 }
 
-createElement.closingTag = function (tagName) {
+function closingTag(tagName) {
   return '</' + tagName + '>'
 }
 
@@ -49,25 +52,17 @@ createElement.closingTag = function (tagName) {
   result will have a leading space
 
 */
-createElement.attributes = function (attributes) {
+function createAttributes(attributes) {
   var buf = ''
 
   Object.keys(attributes).forEach(function (attribute) {
     var value = attributes[attribute]
+    if (!value && value !== '') return;
 
-    if (!value) return;
-
-    if (Array.isArray(value)) {
-      value = value.filter(function (x) {
-        return x
-      }).join(' ')
-    } else if (Object(value) === value) {
-      value = Object.keys(value).filter(function (key) {
-        return value[key]
-      }).join(' ')
-    }
-
-    if (!value) return;
+    value = Array.isArray(value) ? validValues(value)
+      : Object(value) === value ? validKeys(value)
+      : value
+    if (!value && value !== '') return;
 
     buf += ' ' + attribute
     if (value !== true) buf += '="' + value + '"';
@@ -76,15 +71,16 @@ createElement.attributes = function (attributes) {
   return buf
 }
 
-createElement.selfClosingTags = {
-  meta: true,
-  img: true,
-  link: true,
-  input: true,
-  source: true,
-  area: true,
-  base: true,
-  col: true,
-  br: true,
-  hr: true
+function validValues(array) {
+  return array.filter(identity).join(' ')
+}
+
+function validKeys(object) {
+  return Object.keys(object).filter(function (key) {
+    return object[key]
+  }).join(' ')
+}
+
+function identity(x) {
+  return x
 }
