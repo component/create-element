@@ -39,7 +39,7 @@ yields:
   If a function, evaluates the function within `createElement.element`'s current context, ie `fn.call(this, '')`.
 
 ```js
-var html = createElement.element('a', {
+var html = createElement('a', {
   href: '#'
 }, function (html) {
   // html === ''
