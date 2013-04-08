@@ -1,4 +1,4 @@
-# Create Element
+# Create Element [![Build Status](https://travis-ci.org/discore/create-element.png)](https://travis-ci.org/discore/create-element)
 
 Programatically create an HTML string.
 

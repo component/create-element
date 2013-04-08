@@ -13,5 +13,8 @@
   "bugs": {
     "mail": "me@jongleberry.com",
     "url": "https://github.com/discore/create-element/issues"
+  },
+  "scripts": {
+    "test": "node test"
   }
 }
