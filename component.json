@@ -1,6 +1,7 @@
 {
   "name": "create-element",
   "description": "HTML element string creator",
+  "repo": "discore/create-element",
   "version": "0.1.0",
   "main": "index.js",
   "scripts": [
