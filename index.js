@@ -72,15 +72,11 @@ function createAttributes(attributes) {
 }
 
 function validValues(array) {
-  return array.filter(identity).join(' ')
+  return array.filter(Boolean).join(' ')
 }
 
 function validKeys(object) {
   return Object.keys(object).filter(function (key) {
     return object[key]
   }).join(' ')
-}
-
-function identity(x) {
-  return x
 }
