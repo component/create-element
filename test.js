@@ -26,4 +26,14 @@ assert.equal(el('a', {
   title: ''
 }), '<a class="a b c" href="#" title=""></a>')
 
+assert.equal(el('a', function (html) {
+  return html + '2'
+}), '<a>2</a>')
+
+assert.equal(el('a', {
+  href: '#'
+}, function (html) {
+  return html + '2'
+}), '<a href="#">2</a>')
+
 console.log('Tests pass!')

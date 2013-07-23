@@ -23,7 +23,7 @@ var selfClosingTags = createElement.selfClosingTags = {
 
 */
 function createElement(tagName, attributes, block) {
-  if (!block && attributes && Object(attributes) !== attributes) {
+  if (~['function', 'string'].indexOf(typeof attributes)) {
     block = attributes
     attributes = null
   }
