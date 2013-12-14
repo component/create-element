@@ -1,7 +1,7 @@
 {
   "name": "create-element",
   "description": "HTML element string creator",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": {
     "name": "Jonathan Ong",
     "email": "me@jongleberry.com",
@@ -10,10 +10,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/discore/create-element.git"
+    "url": "https://github.com/component/create-element.git"
   },
   "bugs": {
-    "url": "https://github.com/discore/create-element/issues",
+    "url": "https://github.com/component/create-element/issues",
     "email": "me@jongleberry.com"
   },
   "license": "MIT",
