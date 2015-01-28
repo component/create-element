@@ -57,18 +57,22 @@ function createAttributes(attributes) {
 
   Object.keys(attributes).forEach(function (attribute) {
     var value = attributes[attribute]
-    if (!value && value !== '') return;
+    if (!truthyEnough(value)) return;
 
     value = Array.isArray(value) ? validValues(value)
       : Object(value) === value ? validKeys(value)
       : value
-    if (!value && value !== '') return;
+    if (!truthyEnough(value)) return;
 
     buf += ' ' + attribute
     if (value !== true) buf += '="' + value + '"';
   })
 
   return buf
+}
+
+function truthyEnough (value) {
+  return value || value === 0 || value === '';
 }
 
 function validValues(array) {
