@@ -36,4 +36,8 @@ assert.equal(el('a', {
   return html + '2'
 }), '<a href="#">2</a>')
 
+assert.equal(el('meta', {
+  property: 0
+}), '<meta property="0">');
+
 console.log('Tests pass!')
