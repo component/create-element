@@ -40,4 +40,8 @@ assert.equal(el('meta', {
   property: 0
 }), '<meta property="0">');
 
+assert.equal(el('meta', {
+  content: '<script onload="alert();">'
+}), '<meta content="&lt;script onload=&quot;alert();&quot;&gt;">');
+
 console.log('Tests pass!')

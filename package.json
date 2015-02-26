@@ -19,5 +19,11 @@
   "license": "MIT",
   "scripts": {
     "test": "node test"
+  },
+  "dependencies": {
+    "escape-html": "^1.0.1"
+  },
+  "browser": {
+    "escape-html": "escape-html"
   }
 }

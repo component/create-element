@@ -1,3 +1,5 @@
+var escapeHtml = require('escape-html');
+
 module.exports = createElement
 createElement.openingTag = openingTag
 createElement.closingTag = closingTag
@@ -65,7 +67,7 @@ function createAttributes(attributes) {
     if (!truthyEnough(value)) return;
 
     buf += ' ' + attribute
-    if (value !== true) buf += '="' + value + '"';
+    if (value !== true) buf += '="' + escapeHtml(value) + '"';
   })
 
   return buf
